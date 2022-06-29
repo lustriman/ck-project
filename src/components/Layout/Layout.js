@@ -1,11 +1,27 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Header from "../Header/Header";
 
-function Layout({ children }) {
+const Home = React.lazy(() => import("../../pages/Home/Home"));
+
+const MasterConfig = React.lazy(() =>
+  import("../../pages/MasterConfig/MasterConfig")
+);
+
+function Layout() {
   return (
     <>
-      <Header />
-      {children}
+      <Router>
+        <Header />
+        <div className="container">
+          <br />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/master-config" element={<MasterConfig />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }
